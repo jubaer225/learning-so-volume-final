@@ -1,0 +1,67 @@
+<header class="site-header">
+  <div class="site-header__inner">
+    <nav aria-label="Main menu" class="site-header__menu">
+      {% if section.settings.menu != blank %}
+        <ul class="site-header__menu-list">
+          {% for link in section.settings.menu.links %}
+            <li>
+              <a href="{{ link.url }}" class="site-header__menu-link">{{ link.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <ul class="site-header__menu-list">
+          <li>
+            <a href="/" class="site-header__menu-link">Home</a>
+          </li>
+          <li>
+            <a href="/collections/all" class="site-header__menu-link">Shop</a>
+          </li>
+          <li>
+            <a href="/pages/contact" class="site-header__menu-link">Contact</a>
+          </li>
+        </ul>
+      {% endif %}
+    </nav>
+
+    <div class="site-header__logo-wrap">
+      <a href="{{ routes.root_url }}" class="site-header__logo-link">
+        {% if section.settings.logo != blank %}
+          {{ section.settings.logo | image_url: width: 220 | image_tag: alt: shop.name, loading: 'lazy', widths: '120, 180, 220', class: 'site-header__logo-image' }}
+        {% else %}
+          <h1 class="site-header__logo-text">{{ shop.name }}</h1>
+        {% endif %}
+      </a>
+    </div>
+
+    <div class="site-header__cart">
+      <a
+        href="{{ routes.cart_url }}"
+        aria-label="Cart"
+        class="site-header__cart-link">
+        <span aria-hidden="true">🛒</span>
+        <span>Cart</span>
+        {% if cart.item_count > 0 %}
+          <span class="site-header__cart-count">({{ cart.item_count }})</span>
+        {% endif %}
+      </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      }, {
+        "type": "link_list",
+        "id": "menu",
+        "label": "Menu"
+      }
+    ]
+  }
+{% endschema %}
