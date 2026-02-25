@@ -1,0 +1,56 @@
+{{ 'custom-cart-drawer.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'custom-cart-drawer.js' | asset_url }}" defer></script>
+
+<custom-cart-drawer data-open-trigger="custom-cart-bubble" class="custom-cart-drawer-container">
+  <div id="CustomCartOverlay" class="custom-cart-drawer-overlay"></div>
+  <div class="custom-cart-drawer">
+    <div class="custom-cart-drawer__header">
+      <h2>Cart</h2>
+      <button data-close class="link custom-cart-drawer__close link-with-icon button button-unstyled">
+        ✕
+      </button>
+    </div>
+    <div class="custom-cart-drawer__inner">
+      {% if cart.items.size > 0 %}
+        <div class="custom-cart-drawer__content">
+          <div class="custom-cart-drawer__items">
+            {% for item in cart.items %}
+              <div class="custom-cart-drawer__item" data-line="{{forloop.index}}">
+                <div class="custom-cart-drawer__item-image">
+                  {{ item.image | image_url: width: 100 | image_tag }}
+                </div>
+
+                <div class="custom-cart-drawer__item-info">
+                  <h5 class="custom-cart-drawer__item-title">{{ item.product.title }}</h5>
+                  <span class="custom-cart-drawer__item-price">{{ item.price | money }}</span>
+                </div>
+
+                <div class="custom-cart-drawer__item-actions">
+                  <div class="quantity quantity-selector">
+                    <button data-minus class="link-no-underline quantity_button button quantity-minus">-</button>
+                    <span>{{ item.quantity }}</span>
+                    <button data-plus class="link-no-underline quantity_button button quantity-plus">+</button>
+                  </div>
+
+                  <button
+                    data-quantity="0"
+                    data-remove
+                    class="link custom-cart-drawer__remove button">Remove</button>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="custom-cart-drawer__footer">
+          <h3>Total: {{ cart.total_price | money }}</h3>
+          <button class="button">Checkout</button>
+        </div>
+      {% else %}
+        <div class="custom-cart-drawer__empty">
+          <p>Your cart is empty</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</custom-cart-drawer>

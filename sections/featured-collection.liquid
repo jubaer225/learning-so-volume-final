@@ -1,5 +1,6 @@
 {{ 'featured-collection.css' | asset_url | stylesheet_tag }}
 
+
 <section class="featured-collection">
   <div class="featured-collection__header">
     <h2 class="featured-collection__title">{{ section.settings.heading }}</h2>
@@ -24,6 +25,8 @@
             <p class="featured-collection__price">{{ product.price | money }}</p>
           </div>
         </a>
+        {% render 'add-cart-atc-button'
+          , product: product %}
       {% endfor %}
     {% else %}
       {% for item in (1..4) %}

@@ -1,0 +1,19 @@
+{% comment %} 
+  Snippet: button
+  Description: Reusable button component
+  Usage: {% include 'button', text: 'Click me', url: '#', style: 'primary' %} 
+{% endcomment %}
+
+{% if include.style == 'primary' %}
+  <a href="{{ include.url }}" class="button button--primary">
+    {{ include.text }}
+  </a>
+{% elsif include.style == 'secondary' %}
+  <a href="{{ include.url }}" class="button button--secondary">
+    {{ include.text }}
+  </a>
+{% else %}
+  <a href="{{ include.url }}" class="button">
+    {{ include.text }}
+  </a>
+{% endif %}

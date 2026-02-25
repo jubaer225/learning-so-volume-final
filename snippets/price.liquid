@@ -1,0 +1,7 @@
+{% comment %} 
+  Snippet: price
+  Description: Formats and displays product price with optional currency
+  Usage: {% include 'price', amount: product.price %} 
+{% endcomment %}
+
+<span class="price">{{ include.amount | money }}</span>

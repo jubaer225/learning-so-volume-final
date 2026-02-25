@@ -35,16 +35,13 @@
     </div>
 
     <div class="site-header__cart">
-      <a
-        href="{{ routes.cart_url }}"
-        aria-label="Cart"
-        class="site-header__cart-link">
+      <span id="custom-cart-bubble" class="site-header__cart-link">
         <span aria-hidden="true">🛒</span>
         <span>Cart</span>
         {% if cart.item_count > 0 %}
           <span class="site-header__cart-count">({{ cart.item_count }})</span>
         {% endif %}
-      </a>
+      </span>
     </div>
   </div>
 </header>

@@ -1,0 +1,21 @@
+{% comment %} 
+  Snippet: product-card
+  Description: Reusable product card component
+  Usage: {% include 'product-card', product: product %} 
+{% endcomment %}
+
+<article class="product-card">
+  <a href="{{ include.product.url }}" class="product-card__link">
+    {% if include.product.featured_image %}
+      {{ include.product.featured_image | image_url: width: 400 | image_tag: class: 'product-card__image', alt: include.product.title, loading: 'lazy' }}
+    {% endif %}
+  </a>
+  <div class="product-card__info">
+    <h3 class="product-card__title">
+      <a href="{{ include.product.url }}">{{ include.product.title }}</a>
+    </h3>
+    <p class="product-card__price">
+      {% include 'price', amount: include.product.price %}
+    </p>
+  </div>
+</article>
